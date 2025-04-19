@@ -18,8 +18,7 @@ const Feedback: React.FC = () => {
 
   // const [postFeedback, result] = usePostFeedbackMutation();
 
-  async function handlePostFeedback(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  async function handlePostFeedback() {
     setLoading(true);
 
     // postFeedback({
@@ -43,6 +42,7 @@ const Feedback: React.FC = () => {
       }
     } catch (error) {
       console.log(error);
+      setLoading(false)
     }
   }
 
@@ -62,7 +62,7 @@ const Feedback: React.FC = () => {
               &times;
             </span>
             <h1 className="title">Отзыв гостей</h1>
-            <form className="feedback-form" onSubmit={handlePostFeedback}>
+            <form className="feedback-form" onSubmit={e => e.preventDefault()}>
               <div className="question-box">
                 <p>Ваше впечатление</p>
                 <div className="rating-box">
@@ -89,7 +89,11 @@ const Feedback: React.FC = () => {
                 ></textarea>
               </div>
 
-              <button disabled={loading}>
+              <button disabled={loading} style={loading ? { opacity: .6, cursor: "not-allowed" } : {}} onClick={() => {
+                if (!loading) {
+                  handlePostFeedback();
+                }
+              }}>
                 {loading ? (
                   <PulseLoader color="#ddd" size={8} speedMultiplier={0.6} />
                 ) : (
@@ -99,7 +103,7 @@ const Feedback: React.FC = () => {
             </form>
           </div>
         </div>
-      </div>
+      </div >
     </>
   );
 };
