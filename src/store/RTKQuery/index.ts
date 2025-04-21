@@ -10,7 +10,7 @@ interface getAllCategoriesResponse {
 export const storeAPI = createApi({
   reducerPath: "storeAPI",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://qrmenu.celavi.uz/api",
+    baseUrl: "https://qrmenu.edisonnukus.uz/api",
   }),
   endpoints: (builder) => ({
     getAllProducts: builder.query<any, void>({

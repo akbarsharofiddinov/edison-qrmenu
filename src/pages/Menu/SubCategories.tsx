@@ -11,7 +11,7 @@ const SubCategories: React.FC = () => {
   async function getSubCategories() {
     try {
       const response = await axios.get(
-        `https://qrmenu.celavi.uz/api/products/?subcategory_id=${subcategory_id}`
+        `https://qrmenu.edisonnukus.uz/api/products/?subcategory_id=${subcategory_id}`
       );
 
       if (response.status === 200) {

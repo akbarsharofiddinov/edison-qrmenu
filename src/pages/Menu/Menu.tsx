@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useGetCategoryQuery } from "../../store/RTKQuery";
+import { useGetCategoryQuery, useGetProductsByCategoryIdQuery } from "../../store/RTKQuery";
 import LoaderComponent from "../../components/LoaderComponent/LoaderComponent";
 import ProductItem from "../../components/ProductItem/ProductItem";
 import { CategoryItem, PrevBtn } from "../../components";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 
 const Menu: React.FC = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -19,28 +18,21 @@ const Menu: React.FC = () => {
 
   const navigate = useNavigate();
 
-  async function getProducts() {
-    try {
-      const response = await axios.get(
-        `https://qrmenu.celavi.uz/api/products/?category_id=${category_id}`
-      );
-      if (response.status === 200) {
-        setProducts(response.data.data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  const { isSuccess, data, refetch } = useGetProductsByCategoryIdQuery(parseInt(category_id!));
 
   useEffect(() => {
-    getProducts();
-  }, [category_id]);
+    refetch();
 
-  useEffect(() => {
     if (!category_id) {
       navigate("/");
     }
   }, [category_id]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      setProducts(data.data)
+    }
+  }, [isSuccess])
 
   useEffect(() => {
     if (categoryDataResponse?.data.subcategories.length)
