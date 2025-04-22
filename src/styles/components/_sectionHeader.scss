@@ -60,10 +60,14 @@
 
 .infos-top {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  align-items: start;
+  gap: 15px;
   flex-direction: column;
+
   a {
     font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
   }
 }
