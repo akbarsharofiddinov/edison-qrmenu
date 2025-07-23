@@ -15,10 +15,9 @@ const SectionHeader: React.FC = () => {
           <div>
             <div className="infos-top">
               <span>
-
-                <a href="tel:+998942679009">
+                <a href="tel:+998942689009">
                   <FiPhone color="#ffb300" fontSize={22} />
-                  +998 94 267 90 09
+                  +998 94 268 90 09
                 </a>
               </span>
               <span>
