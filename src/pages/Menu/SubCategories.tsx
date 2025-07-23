@@ -35,7 +35,9 @@ const SubCategories: React.FC = () => {
           ))}
         </div>
       ) : (
-        ""
+        <div style={{ margin: "20px 0", fontSize: "18px" }}>
+          Ma'lumot topilmadi
+        </div>
       )}
     </>
   );

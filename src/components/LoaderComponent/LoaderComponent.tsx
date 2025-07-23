@@ -8,8 +8,8 @@ const LoaderComponent: React.FC = (props) => {
     width={"100%"}
     height={"100%"}
     viewBox="0 0 353 187"
-    backgroundColor="#424242"
-    foregroundColor="#2b2b2b"
+    backgroundColor="#ebebebff"
+    foregroundColor="#dadadaff"
     {...props}
   >
     <rect x="19" y="30" rx="0" ry="0" width="0" height="1" />

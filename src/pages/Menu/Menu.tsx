@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useGetCategoryQuery, useGetProductsByCategoryIdQuery } from "../../store/RTKQuery";
+import {
+  useGetCategoryQuery,
+  useGetProductsByCategoryIdQuery,
+} from "../../store/RTKQuery";
 import LoaderComponent from "../../components/LoaderComponent/LoaderComponent";
 import ProductItem from "../../components/ProductItem/ProductItem";
 import { CategoryItem, PrevBtn } from "../../components";
@@ -18,7 +21,9 @@ const Menu: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const { isSuccess, data, refetch } = useGetProductsByCategoryIdQuery(parseInt(category_id!));
+  const { isSuccess, data, refetch } = useGetProductsByCategoryIdQuery(
+    parseInt(category_id!)
+  );
 
   useEffect(() => {
     refetch();
@@ -30,9 +35,9 @@ const Menu: React.FC = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      setProducts(data.data)
+      setProducts(data.data);
     }
-  }, [isSuccess])
+  }, [isSuccess]);
 
   useEffect(() => {
     if (categoryDataResponse?.data.subcategories.length)
@@ -77,9 +82,19 @@ const Menu: React.FC = () => {
             )
           ) : (
             <div className="products">
-              {products?.map((product, index) => (
-                <ProductItem data={product} isLoading={isLoading} key={index} />
-              ))}
+              {products.length ? (
+                products?.map((product, index) => (
+                  <ProductItem
+                    data={product}
+                    isLoading={isLoading}
+                    key={index}
+                  />
+                ))
+              ) : (
+                <div style={{ margin: "20px 0", fontSize: "18px" }}>
+                  Ma'lumot topilmadi
+                </div>
+              )}
             </div>
           )}
         </div>

@@ -9,7 +9,7 @@ const Categories: React.FC = () => {
   return (
     <>
       {isLoading ? (
-        <div style={{ marginTop: "25px" }}>
+        <div className="categories">
           {Array(4)
             .fill(4)
             .map(() => (
@@ -20,7 +20,7 @@ const Categories: React.FC = () => {
         <div style={{ margin: "20px 0", fontSize: "18px" }}>
           Ma'lumot topilmadi
         </div>
-      ) : (
+      ) : data?.data ? (
         <div className="categories">
           {data?.data.map((item, index) => (
             <CategoryItem
@@ -30,6 +30,10 @@ const Categories: React.FC = () => {
               key={index}
             />
           ))}
+        </div>
+      ) : (
+        <div style={{ margin: "20px 0", fontSize: "18px" }}>
+          Ma'lumot topilmadi
         </div>
       )}
     </>
