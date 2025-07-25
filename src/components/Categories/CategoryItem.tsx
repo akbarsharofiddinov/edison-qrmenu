@@ -14,6 +14,9 @@ const CategoryItem: React.FC<IProps> = ({
   subCategory,
   isLoading,
 }: IProps) => {
+
+  
+
   return type === "category" ? (
     <div className="category">
       <Link to={`/menu/${data?.translations[0].category_id}`}>
@@ -31,7 +34,7 @@ const CategoryItem: React.FC<IProps> = ({
       </Link>
     </div>
   ) : (
-    <div className="category">
+    <div className="category subcategory">
       <Link to={`${subCategory?.translations[0].sub_category_id}`}>
         <img src={subCategory?.img_url} alt="category-image" />
         <div className="category-body">

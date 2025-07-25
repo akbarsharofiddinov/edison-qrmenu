@@ -45,58 +45,56 @@ const Menu: React.FC = () => {
     else setHasSubCategory(false);
   }, [isLoading]);
 
-  useEffect(() => {
-    if (subcategory_id) setHasSubCategory(false);
-    else setHasSubCategory(true);
-  }, [subcategory_id]);
-
   return (
     <>
       <PrevBtn />
       {categoryDataResponse?.data ? (
-        <div className="container">
-          <h1 className="menu-title">{categoryDataResponse?.data?.name}</h1>
-          {isLoading ? (
-            <div style={{ marginTop: "25px" }}>
-              {Array(4)
-                .fill(4)
-                .map(() => (
-                  <LoaderComponent key={Math.random()} />
-                ))}
-            </div>
-          ) : isError ? (
-            <div>Tovar topilmadi</div>
-          ) : subcategory_id ? (
-            <Outlet />
-          ) : hasSubCategory ? (
-            categoryDataResponse.data.subcategories.map(
-              (subCategory, index) => (
-                <div className="categories" key={index}>
-                  <CategoryItem
-                    subCategory={subCategory}
-                    type="subcategory"
-                    isLoading={isLoading}
-                  />
-                </div>
-              )
-            )
-          ) : (
-            <div className="products">
-              {products.length ? (
-                products?.map((product, index) => (
-                  <ProductItem
-                    data={product}
-                    isLoading={isLoading}
-                    key={index}
-                  />
-                ))
-              ) : (
-                <div style={{ margin: "20px 0", fontSize: "18px" }}>
-                  Ma'lumot topilmadi
-                </div>
-              )}
-            </div>
-          )}
+        <div className="menu">
+          <div className="container">
+            <h1 className="menu-title">{categoryDataResponse?.data?.name}</h1>
+            {isLoading ? (
+              <div style={{ marginTop: "25px" }}>
+                {Array(4)
+                  .fill(4)
+                  .map(() => (
+                    <LoaderComponent key={Math.random()} />
+                  ))}
+              </div>
+            ) : isError ? (
+              <div>Tovar topilmadi</div>
+            ) : subcategory_id ? (
+              <Outlet />
+            ) : hasSubCategory ? (
+              <div className="categories subcategories">
+                {categoryDataResponse.data.subcategories.map(
+                  (subCategory, index) => (
+                    <CategoryItem
+                      subCategory={subCategory}
+                      type="subcategory"
+                      isLoading={isLoading}
+                      key={index}
+                    />
+                  )
+                )}
+              </div>
+            ) : (
+              <div className="products">
+                {products.length ? (
+                  products?.map((product, index) => (
+                    <ProductItem
+                      data={product}
+                      isLoading={isLoading}
+                      key={index}
+                    />
+                  ))
+                ) : (
+                  <div style={{ margin: "20px 0", fontSize: "18px" }}>
+                    Ma'lumot topilmadi
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       ) : (
         <div className="container" style={{ marginTop: "25px" }}>
